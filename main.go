@@ -1,15 +1,18 @@
 package main
 
 import (
-	"io"
+	"html/template"
 	"net/http"
 )
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "hello Bachelorarbeit!")
+var templateStart *template.Template
+
+func start(w http.ResponseWriter, r *http.Request) {
+	templateStart.Execute(w, nil)
 }
 
 func main() {
-	http.HandleFunc("/", hello)
+	templateStart = template.Must(template.ParseFiles("template/start.html"))
+	http.HandleFunc("/", start)
 	http.ListenAndServe(":8000", nil)
 }
