@@ -1,0 +1,34 @@
+.search-box {
+    position: absolute;
+    margin-top: -30%;
+}
+.search-box .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    left: 15px;
+    top: 0px;
+}
+.search-box .glyphicon:before {
+    color: white;
+    transition: all 0.2s linear;
+}
+.search-box input {
+    color: #fff;
+    padding-left: 60px;
+    background: #546e7a;
+    border:0;
+    outline: none !important;
+    transition: all 0.2s linear;
+}
+.search-box input:focus {
+    background: #fff !important;
+    outline: 0;
+    color: #333;
+}
+.search-box input:focus + .glyphicon:before {
+    color: #333;
+}
+.search-box input:hover {
+    background: #78909c;
+}

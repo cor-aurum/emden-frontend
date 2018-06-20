@@ -1,24 +1,84 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/res/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/res/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<header>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+	      <li><a href="#">{{.ChangeSearchType}}</a></li>
+      </ul>
 
-    <title>Stammdatensuche</title>
-  </head>
-  <body>
-	  <div class="center-block">
-	  <form><input type="text" /></form>
-	  </div>
+      <ul id="nav-mobile" class="sidenav">
+	      <li><a href="#">{{.ChangeSearchType}}</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </header>
+  <main>
+	  <div class="{{.SearchBar}}">
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      {{if not .Results}}
+      <h1 class="header center blue-text">EMDEN</h1>
+      <div class="row center">
+        <h6 class="header col s12 light">Easy Master Data Search Engine</h6>
+      </div>
+      {{end}}
+      <div class="input-field col s12">
+	      <input id="search" type="text">
+	      <label for="search">{{.Search}}</label>
+      </div>
+      <br><br>
+    </div>
+    </div>
+  </div>
+          {{with .Results}} {{range .}}
+	  <div class="row container">
+    		<div class="col s12">
+      			<div class="card white">
+        			<div class="card-content black-text">
+          				<span class="card-title">Card Title</span>
+					<p>{{.Text}}</p>
+        			</div>
+			{{if .Url}} {{if .Urltext}}
+        		<div class="card-action">
+				<a href="{{.Url}}">{{.Urltext}}</a>
+        		</div>
+			{{end}} {{end}}
+      			</div>
+    		</div>
+  	  </div>
+	  {{end}} {{end}}
+  </main>
+  <footer class="page-footer blue">
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="#">Felix Schütze</a>
+      </div>
+      <div class="container">
+      Styles made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/res/materialize.js"></script>
+  <script src="/res/init.js"></script>
+
   </body>
 </html>
+
