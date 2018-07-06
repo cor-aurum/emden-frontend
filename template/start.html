@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>{{.Title}}</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,20 +13,19 @@
 <body>
 <header>
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+	  <div class="nav-wrapper container" margin="0"><a id="logo-container" href="/" class="brand-logo"><img src="{{.Logo}}" alt="Logo"/></a>
       <ul class="right hide-on-med-and-down">
-	      <li><a href="#">{{.ChangeSearchType}}</a></li>
+	      <li><a href="/{{if not .Datafields}}extended{{end}}">{{.ChangeSearchType}}</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-	      <li><a href="#">{{.ChangeSearchType}}</a></li>
+	      <li><a href="/{{if not .Datafields}}extended{{end}}">{{.ChangeSearchType}}</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   </header>
   <main>
-	  <div class="{{.SearchBar}}">
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
@@ -36,12 +35,22 @@
         <h6 class="header col s12 light">Easy Master Data Search Engine</h6>
       </div>
       {{end}}
-      <div class="input-field col s12">
-	      <input id="search" type="text">
-	      <label for="search">{{.Search}}</label>
-      </div>
+	      <form>
+		{{if not .Datafields}}
+      		<div class="input-field col s12">
+	      		<input id="query" type="text" class="black-text" name="query">
+	      		<label for="query">{{.Search}}</label>
+      		</div>
+		{{end}}
+	      	{{with .Datafields}}{{range .}}
+      			<div class="input-field col s12">
+				<input id="search" type="text" class="black-text" name="{{.}}">
+				<label for="{{.}}">{{.}}</label>
+      			</div>
+	      	{{end}}{{end}}
+		<button class="btn waves-effect waves-light" type="submit">{{.Submit}}<i class="material-icons right">send</i></button>
+	      </form>
       <br><br>
-    </div>
     </div>
   </div>
           {{with .Results}} {{range .}}
@@ -49,14 +58,16 @@
     		<div class="col s12">
       			<div class="card white">
         			<div class="card-content black-text">
-          				<span class="card-title">Card Title</span>
-					<p>{{.Text}}</p>
+				{{if .Title}}
+					<span class="card-title">{{.Title}}</span>
+				{{end}}
+				{{range .}}
+					<p>{{.}}</p>
+				{{end}}
+				{{if .Url}} {{if .Urltext}}
+				<span class="card-action"><a href="{{.Url}}">{{.Urltext}}</a></span>
+				{{end}} {{end}}
         			</div>
-			{{if .Url}} {{if .Urltext}}
-        		<div class="card-action">
-				<a href="{{.Url}}">{{.Urltext}}</a>
-        		</div>
-			{{end}} {{end}}
       			</div>
     		</div>
   	  </div>
@@ -65,10 +76,10 @@
   <footer class="page-footer blue">
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="#">Felix Schütze</a>
+      Made by <a class="white-text text-lighten-3" href="#">Felix Schütze</a>
       </div>
       <div class="container">
-      Styles made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      Styles made by <a class="white-text text-lighten-3" href="http://materializecss.com">Materialize</a>
       </div>
     </div>
   </footer>
