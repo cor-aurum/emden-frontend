@@ -12,8 +12,8 @@
 </head>
 <body>
 <header>
-  <nav class="light-blue lighten-1" role="navigation">
-	  <div class="nav-wrapper container" margin="0"><a id="logo-container" href="/" class="brand-logo"><img src="{{.Logo}}" alt="Logo"/></a>
+  <nav class="blue" role="navigation">
+	  <div class="nav-wrapper container" margin="0"><a id="logo-container" href="/"><img src="{{.Logo}}" alt="Logo" style="height:90%"/></a>
       <ul class="right hide-on-med-and-down">
 	      <li><a href="/{{if not .Datafields}}extended{{end}}">{{.ChangeSearchType}}</a></li>
       </ul>
@@ -53,35 +53,33 @@
       <br><br>
     </div>
   </div>
+  {{if .Results}}
+	  <div class="row container">
+    		<div class="col s12">
+      	<div class="card white">
+        			<div class="card-content black-text">
+		<p>{{.Count}} {{.Result}} {{.Took}}ms</p>
+	</div>
+	</div>
+    		</div>
+  	  </div>
           {{with .Results}} {{range .}}
 	  <div class="row container">
     		<div class="col s12">
       			<div class="card white">
         			<div class="card-content black-text">
-				{{if .Title}}
-					<span class="card-title">{{.Title}}</span>
-				{{end}}
-				{{range .}}
-					<p>{{.}}</p>
-				{{end}}
-				{{if .Url}} {{if .Urltext}}
-				<span class="card-action"><a href="{{.Url}}">{{.Urltext}}</a></span>
-				{{end}} {{end}}
+					<span class="card-title">{{.Name}}</span>
+					<p>{{.Adresse}}</p>
+        				<p>{{.Telefonnummer}}</p>
+        				<p>{{.Email}}</p>
+
         			</div>
       			</div>
     		</div>
   	  </div>
-	  {{end}} {{end}}
+	  {{end}} {{end}}{{end}}
   </main>
   <footer class="page-footer blue">
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="white-text text-lighten-3" href="#">Felix Schütze</a>
-      </div>
-      <div class="container">
-      Styles made by <a class="white-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
   </footer>
 
 

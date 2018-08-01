@@ -14,8 +14,6 @@ var extended bool = false
 
 const APIUrl string = "http://localhost:8080/EMDEN/"
 
-//const APIUrl string = "http://localhost:8080/Suche-Backend-0.0.1-SNAPSHOT/"
-
 type Page struct {
 	ChangeSearchType string
 	Results          []interface{}
@@ -23,6 +21,9 @@ type Page struct {
 	Logo             string
 	Submit           string
 	Title            string
+	Took             string
+	Count            string
+	Result           string
 	Datafields       []string
 }
 
@@ -54,7 +55,7 @@ func getString(url string) string {
 
 func getSearch(r *http.Request) (bool, string) {
 	suc := false
-	searchstring := r.URL.RawQuery //.Get("search")
+	searchstring := r.URL.RawQuery
 	if len(searchstring) != 0 {
 		suc = true
 	}
@@ -75,6 +76,7 @@ func handlePage(w http.ResponseWriter, r *http.Request, searchType string) {
 	page := Page{ChangeSearchType: searchType, Search: "Suchbegriff"}
 	page.Logo = APIUrl + "company/logo"
 	page.Submit = "LOS!"
+	page.Result = "Ergebnisse in"
 	page.Title = "EMDEN | " + getString(APIUrl+"company/name")
 	if extended {
 		getJson(APIUrl+"company/datafields", &page)
