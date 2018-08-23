@@ -18,7 +18,6 @@ type Page struct {
 	ChangeSearchType string
 	Results          []interface{}
 	Search           string
-	Logo             string
 	Submit           string
 	Title            string
 	Took             string
@@ -74,7 +73,6 @@ func extendedSearch(w http.ResponseWriter, r *http.Request) {
 
 func handlePage(w http.ResponseWriter, r *http.Request, searchType string) {
 	page := Page{ChangeSearchType: searchType, Search: "Suchbegriff"}
-	page.Logo = APIUrl + "company/logo"
 	page.Submit = "LOS!"
 	page.Result = "Ergebnisse in"
 	page.Title = "EMDEN | " + getString(APIUrl+"company/name")
@@ -87,6 +85,9 @@ func handlePage(w http.ResponseWriter, r *http.Request, searchType string) {
 	}
 
 	templateStart.Execute(w, page)
+}
+
+func logo(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
